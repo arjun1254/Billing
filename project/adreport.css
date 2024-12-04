@@ -1,0 +1,69 @@
+body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .content {
+            padding: 20px;
+            background: linear-gradient(to bottom right, #f0e68c, #f0e68c);
+            height: 100vh;
+        }
+        .content .title {
+            font-size: 32px;
+            display: flex;
+            align-items: center;
+        }
+        .content .title img {
+            margin-right: 10px;
+        }
+        .content .filters {
+            display: flex;
+            align-items: center;
+            margin: 20px 0;
+        }
+        .content .filters input[type="date"] {
+            padding: 5px;
+            margin: 0 10px;
+        }
+        .content .filters input[type="button"] {
+            padding: 5px 10px;
+            margin: 0 10px;
+            cursor: pointer;
+        }
+        .content .filters .get-data {
+            background-color: limegreen;
+            color: white;
+            border: none;
+        }
+        .content .filters .refresh {
+            background-color: gray;
+            color: white;
+            border: none;
+        }
+        .content .filters .search {
+            padding: 5px;
+            margin-left: 10px;
+        }
+        .content .filters .search i {
+            cursor: pointer;
+        }
+        .content .table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .content .table th, .content .table td {
+            border: 1px solid blue;
+            padding: 10px;
+            text-align: left;
+        }
+        .content .table th {
+            background-color: blue;
+            color: white;
+        }
+        .content .table td {
+            background-color: white;
+            color: black;
+        }
+        .content .total-sales {
+            margin-top: 20px;
+            font-size: 18px;
+        }

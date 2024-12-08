@@ -1,0 +1,304 @@
+<html>
+ <head>
+  <title>
+   Billing
+  </title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="emphome.css">
+  <script src="emphome.js"></script>
+ </head>
+ <body>
+  <div class="header">
+   <img alt="Company Logo" height="50" src="https://storage.googleapis.com/a1aa/image/2oY1VVNf7SwbYi04u2yXuwi1O88TILH4UQQir6M21zH9LQ6JA.jpg" width="50"/>
+   <h1>
+    Billing
+   </h1>
+   <div class="right">
+    <a href="#" onclick="openChangePasswordPopup()">
+     <i class="fas fa-key">
+     </i>
+     Change Password
+    </a>
+    <a href="#" onclick="openLogoutPopup()">
+     <i class="fas fa-sign-out-alt">
+     </i>
+     Logout
+    </a>
+    <a href="#" onclick="openViewAddItemsPopup()">
+     <i class="fas fa-eye">
+     </i>
+     view add items
+    </a>
+    <span>
+     Welcome, employee
+    </span>
+   </div>
+  </div>
+  <div class="container">
+   <div class="section">
+    <label for="billNo">
+     Bill No:
+    </label>
+    <input disabled="" id="billNo" type="text"/>
+   </div>
+   <div class="section">
+    <h2>
+     Customer Details
+    </h2>
+    <label for="contactNo">
+     Contact No:
+    </label>
+    <input id="contactNo" type="text"/>
+    <label for="name">
+     Name:
+    </label>
+    <input id="name" type="text"/>
+    <label for="email">
+     Email:
+    </label>
+    <input id="email" type="text"/>
+    <label for="address">
+     Address:
+    </label>
+    <input id="address" type="text"/>
+   </div>
+   <div class="section">
+    <h2>
+     Product Details
+    </h2>
+    <label for="productId">
+     Product ID:
+    </label>
+    <input disabled="" id="productId" type="text"/>
+    <label for="productName">
+     Product Name:
+    </label>
+    <input id="productName" type="text"/>
+    <label for="price">
+     Price:
+    </label>
+    <input id="price" type="text"/>
+    <label for="quantity">
+     Quantity:
+    </label>
+    <input id="quantity" type="text"/>
+    <label for="description">
+     Description:
+    </label>
+    <input id="description" type="text"/>
+    <button>
+     <i class="fas fa-cart-plus">
+     </i>
+     Add To Cart
+    </button>
+   </div>
+   <div class="table-container">
+    <table>
+     <thead>
+      <tr>
+       <th>
+        SN
+       </th>
+       <th>
+        Particular
+       </th>
+       <th>
+        Qty
+       </th>
+       <th>
+        Price
+       </th>
+       <th>
+        Amount
+       </th>
+      </tr>
+     </thead>
+     <tbody>
+      <!-- Table rows will be dynamically added here -->
+     </tbody>
+    </table>
+   </div>
+   <div class="section">
+    <label for="paymentOptions">
+     Payment Options:
+    </label>
+    <select id="paymentOptions">
+     <option value="cash">
+      Cash
+     </option>
+    </select>
+   </div>
+   <div class="total-section">
+    <div>
+     <label for="totalBill">
+      Your Total Bill:
+     </label>
+     <input disabled="" id="totalBill" type="text"/>
+    </div>
+    <div>
+     <label for="cashProvided">
+      Cash Provided:
+     </label>
+     <input id="cashProvided" type="text"/>
+    </div>
+    <div>
+     <label for="returnAmount">
+      Return Amount:
+     </label>
+     <input disabled="" id="returnAmount" type="text"/>
+    </div>
+   </div>
+   <div class="button-container">
+    <button>
+     Save &amp; Print
+    </button>
+   </div>
+   <div class="total-section">
+    <div>
+     <label for="subtotal">
+      Subtotal:
+     </label>
+     <input disabled="" id="subtotal" type="text"/>
+    </div>
+    <div>
+     <label for="discount">
+      Discount(%):
+     </label>
+     <input id="discount" type="text"/>
+    </div>
+    <div>
+     <label for="taxableAmount">
+      Taxable Amount:
+     </label>
+     <input disabled="" id="taxableAmount" type="text"/>
+    </div>
+    <div>
+     <label for="vat">
+      Vat(%):
+     </label>
+     <input id="vat" type="text"/>
+    </div>
+    <div>
+     <label for="total">
+      Total:
+     </label>
+     <input disabled="" id="total" type="text"/>
+    </div>
+   </div>
+  </div>
+  <div class="popup" id="changePasswordPopup">
+   <div class="popup-content">
+    <h2>
+     Change Password
+    </h2>
+    <input id="currentPassword" placeholder="Current Password" type="password"/>
+    <input id="newPassword" placeholder="New Password" type="password"/>
+    <input id="confirmPassword" placeholder="Confirm Password" type="password"/>
+    <button onclick="changePassword()">
+     Submit
+    </button>
+    <button class="close" onclick="closeChangePasswordPopup()">
+     Close
+    </button>
+   </div>
+  </div>
+  <div class="popup" id="logoutPopup">
+   <div class="popup-content">
+    <h2>
+     Confirm Logout
+    </h2>
+    <p>
+     Are you sure you want to logout?
+    </p>
+    <button onclick="confirmLogout()">
+     Yes
+    </button>
+    <button class="close" onclick="closeLogoutPopup()">
+     No
+    </button>
+   </div>
+  </div>
+  <div class="popup" id="viewAddItemsPopup">
+   <div class="popup-content">
+    <h2>
+     View/Add Items
+    </h2>
+    <input id="searchBar" placeholder="Search..." type="text" onkeyup="searchItems()"/>
+    <label for="itemId">
+     Item ID:
+    </label>
+    <input id="itemId" type="text"/>
+    <label for="itemNumber">
+     Item Number:
+    </label>
+    <input id="itemNumber" type="text"/>
+    <label for="unit">
+     Unit:
+    </label>
+    <input id="unit" type="text"/>
+    <label for="buyingPrice">
+     Buying Price:
+    </label>
+    <input id="buyingPrice" type="text"/>
+    <label for="sellingPrice">
+     Selling Price:
+    </label>
+    <input id="sellingPrice" type="text"/>
+    <label for="quantity">
+     Quantity:
+    </label>
+    <input id="quantity" type="text"/>
+    <label for="expireDate">
+     Expire Date:
+    </label>
+    <input id="expireDate" type="date"/>
+    <label for="description">
+     Description:
+    </label>
+    <input id="description" type="text"/>
+    <button onclick="addItem()">
+     Add Item
+    </button>
+    <button class="close" onclick="closeViewAddItemsPopup()">
+     Close
+    </button>
+    <div class="table-container">
+     <table id="itemsTable">
+      <thead>
+       <tr>
+        <th>
+         Item ID
+        </th>
+        <th>
+         Item Number
+        </th>
+        <th>
+         Unit
+        </th>
+        <th>
+         Buying Price
+        </th>
+        <th>
+         Selling Price
+        </th>
+        <th>
+         Quantity
+        </th>
+        <th>
+         Expire Date
+        </th>
+        <th>
+         Description
+        </th>
+       </tr>
+      </thead>
+      <tbody>
+       <!-- Items will be dynamically added here -->
+      </tbody>
+     </table>
+    </div>
+   </div>
+  </div>
+ 
+ </body>
+</html>

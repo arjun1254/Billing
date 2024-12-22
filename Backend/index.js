@@ -139,41 +139,71 @@ app.get('/employee', (req, res) => {
   });
 })
 
-app.delete('/delete-item/:item_id', (req, res) => {
-  const item_id = req.params.item_id;
+app.delete('/delete-item', (req, res) => {
+  const item_id = req.body.item_id; // Extract item_id from the request body
 
-  if (!item_id || item_id === 'null') {
+  if (!item_id) {
     return res.status(400).json({ success: false, message: "Invalid item ID." });
   }
 
-  const query = `DELETE FROM items WHERE id = ?`;
+  // Search query: Look for item_id in the items table
+  const searchQuery = `SELECT * FROM items WHERE item_id = ?`;
 
-  con.query(query, [item_id], (err, result) => {
+  con.query(searchQuery, [item_id], (err, results) => {
     if (err) {
-      console.error('Error deleting item:', err);
-      return res.status(500).json({ success: false, message: 'Database deletion failed.' });
+      console.error('Error searching for item:', err);
+      return res.status(500).json({ success: false, message: 'Database search failed.' });
     }
 
-    if (result.affectedRows === 0) {
+    // Check if the item exists
+    if (results.length === 0) {
       return res.status(404).json({ success: false, message: 'Item not found.' });
     }
 
-    res.json({ success: true, message: 'Item deleted successfully.' });
-  });
-});
+    // If the item exists, proceed to delete it
+    const deleteQuery = `DELETE FROM items WHERE id = ?`;
 
-app.get('/delete-item/:item_id', (req, res) => {
-  
-  con.connect(function(err) {
-    if (err) throw err;
+    con.query(deleteQuery, [item_id], (err, result) => {
+      if (err) {
+        console.error('Error deleting item:', err);
+        return res.status(500).json({ success: false, message: 'Database deletion failed.' });
+      }
 
-    con.query('DELETE FROM items WHERE item_id = ?', function (err, result, fields) {
-      if (err) throw err;
-      res.json(result)
-
+      res.json({ success: true, message: 'Item deleted successfully.' });
     });
   });
-})
+});
+// app.post('/customer', (req, res) => {
+//   console.log(req.body); // Log the incoming request body
+
+//   const { contact_number, Name, Email, Address } = req.body;
+
+//   console.log('Received data:', req.body); // Debugging log
+
+//   con.connect(function(err) {
+//       if (err) {
+//           console.error('Error connecting to the database:', err);
+//           return res.status(500).json({ message: 'Database connection error', error: err });
+//       }
+
+//       const query = `
+//           INSERT INTO customer (contact_number, Name, Email, Address)
+//           VALUES (?, ?, ?, ?)
+//       `;
+
+//       const values = [contact_number, Name, Email, Address];
+
+//       con.query(query, values, (err, result) => {
+//           if (err) {
+//               console.error('Error inserting data:', err);
+//               return res.status(500).json({ message: 'Error inserting data', error: err });
+//           }
+//           res.status(200).json({ message: 'customer details added successfully' });
+//       });
+//   });
+// });
+
+
 
 
 app.listen(port, () => {

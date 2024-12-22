@@ -34,6 +34,7 @@
     </span>
    </div>
   </div>
+  <form id="" >
   <div class="container">
    <div class="section">
     <label for="billNo">
@@ -62,6 +63,7 @@
     </label>
     <input id="address" type="text"/>
    </div>
+   </form>
    <div class="section">
     <h2>
      Product Details
@@ -69,6 +71,9 @@
     <label for="productId">
      Product ID:
     </label>
+    <select id="Product_id">
+        <option value=""></option>
+      </select>
     <input disabled="" id="productId" type="text"/>
     <label for="productName">
      Product Name:
@@ -221,44 +226,8 @@
   <div class="popup" id="viewAddItemsPopup">
    <div class="popup-content">
     <h2>
-     View/Add Items
+     View Items
     </h2>
-    <input id="searchBar" placeholder="Search..." type="text" onkeyup="searchItems()"/>
-    <label for="itemId">
-     Item ID:
-    </label>
-    <input id="itemId" type="text"/>
-    <label for="itemNumber">
-     Item Number:
-    </label>
-    <input id="itemNumber" type="text"/>
-    <label for="unit">
-     Unit:
-    </label>
-    <input id="unit" type="text"/>
-    <label for="buyingPrice">
-     Buying Price:
-    </label>
-    <input id="buyingPrice" type="text"/>
-    <label for="sellingPrice">
-     Selling Price:
-    </label>
-    <input id="sellingPrice" type="text"/>
-    <label for="quantity">
-     Quantity:
-    </label>
-    <input id="quantity" type="text"/>
-    <label for="expireDate">
-     Expire Date:
-    </label>
-    <input id="expireDate" type="date"/>
-    <label for="description">
-     Description:
-    </label>
-    <input id="description" type="text"/>
-    <button onclick="addItem()">
-     Add Item
-    </button>
     <button class="close" onclick="closeViewAddItemsPopup()">
      Close
     </button>
@@ -299,6 +268,99 @@
     </div>
    </div>
   </div>
- 
  </body>
+ <script>
+//  document.getElementById('').addEventListener('submit', async (e) => {
+//     e.preventDefault(); // Prevent the default form submission
+//     let expiryDateValue = document.getElementById('expiry_date').value.trim();
+
+// if (expiryDateValue === '') {
+// expiryDateValue = null; // Set to null if empty
+//   }
+
+//     let formData = {
+//         Category: document.getElementById('Category_id').value,
+//         item_id: document.getElementById('item_id').value,
+//         item_name: document.getElementById('item_name').value,
+//         unit: document.getElementById('unit').value,
+//         buying_price: parseFloat(document.getElementById('buying_price').value),
+//         selling_price: parseFloat(document.getElementById('selling_price').value),
+//         quantity: parseInt(document.getElementById('quantity').value),
+//         expiry_date: expiryDateValue,
+//         description: document.getElementById('description').value,
+//     };
+
+//     console.log('Submitting form with data:', formData);
+//     const Url='http://localhost:3000/item';
+
+//     try {
+        
+//         const response = await fetch( Url, {
+//             method: 'POST',
+//             headers: {
+//                 'Content-Type': 'application/json',
+//             },
+//             body: JSON.stringify(formData),
+//         })
+//      .then(response => response.json())
+//      .then(data => console.log(data))
+//      .catch(error => console.error('Error:', error));
+
+//         if (response.ok) {
+//             alert('Item added successfully!');
+//             document.getElementById('item_tb').reset(); // Reset form fields
+//         } else {
+//             const errorDetails = await response.text();
+//             alert(`Failed to add item: ${errorDetails}`);
+//         }
+//     } catch (error) {
+//         //console.error('Error during submission:', error);
+//         //alert('An unexpected error occurred.');
+//     }
+// });
+
+// document.getElementById('cancel-item').addEventListener('click', () => {
+// // Clear all form inputs
+// document.getElementById('item_tb').reset();
+
+// // Optionally, reset any dynamically set fields, e.g., category dropdown
+// document.getElementById('Category_id').value = '';
+// document.getElementById('unit').value = 'pcs'; // Reset to default value
+// });
+
+async function getData() {
+  const url = "http://localhost:3000/item";
+
+  try {
+    const response = await fetch(url, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`Response status: ${response.status}`);
+    }
+
+    const json = await response.json();
+    // Initialize the options with a default "Select itemId" option
+    let products = "<option value=''>Select itemId</option>";
+
+    // Loop through the items and create option elements
+    json.forEach((item) => {
+      products += `<option value='${item.item_id}'>${item.item_id}</option>`;
+    });
+
+    // Populate the dropdown with the generated options
+    document.getElementById("Product_id").innerHTML = products;
+  } catch (error) {
+    console.error(error.message);
+  }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  getData();
+});
+
+</script>
 </html>
